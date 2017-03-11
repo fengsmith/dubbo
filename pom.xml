@@ -51,6 +51,9 @@
 		<module>dubbo-simple</module>
 		<module>dubbo-admin</module>
 		<module>dubbo-demo</module>
+		<module>shfq-client</module>
+		<module>shfq-provider</module>
+		<module>shfq-consumer</module>
 	</modules>
 	<profiles>
 		<profile>
