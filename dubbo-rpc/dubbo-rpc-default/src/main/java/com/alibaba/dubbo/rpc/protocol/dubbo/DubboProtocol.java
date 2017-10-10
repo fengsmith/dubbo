@@ -256,7 +256,7 @@ public class DubboProtocol extends AbstractProtocol {
     }
     
     private void openServer(URL url) {
-        // find server.
+        // find server. // shfq
         String key = url.getAddress();
         //client 也可以暴露一个只有server可以调用的服务。
         boolean isServer = url.getParameter(Constants.IS_SERVER_KEY,true);
@@ -272,7 +272,7 @@ public class DubboProtocol extends AbstractProtocol {
     }
     
     private ExchangeServer createServer(URL url) {
-        //默认开启server关闭时发送readonly事件
+        //默认开启server关闭时发送readonly事件 // shfq
         url = url.addParameterIfAbsent(Constants.CHANNEL_READONLYEVENT_SENT_KEY, Boolean.TRUE.toString());
         //默认开启heartbeat
         url = url.addParameterIfAbsent(Constants.HEARTBEAT_KEY, String.valueOf(Constants.DEFAULT_HEARTBEAT));

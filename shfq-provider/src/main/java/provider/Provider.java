@@ -15,4 +15,6 @@ public class Provider {
         System.in.read(); //为保证服务一直开着，利用输入流的阻塞来模拟,按任意键退出
 
     }
+
+
 }

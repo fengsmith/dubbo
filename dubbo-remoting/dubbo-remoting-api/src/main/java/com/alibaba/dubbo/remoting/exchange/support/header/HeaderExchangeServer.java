@@ -231,7 +231,7 @@ public class HeaderExchangeServer implements ExchangeServer {
         server.send(message, sent);
     }
 
-    private void startHeatbeatTimer() {
+    private void startHeatbeatTimer() { // shfq
         stopHeartbeatTimer();
         if (heartbeat > 0) {
             heatbeatTimer = scheduled.scheduleWithFixedDelay(

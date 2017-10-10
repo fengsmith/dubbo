@@ -18,6 +18,9 @@ package com.alibaba.dubbo.governance.status;
 import com.alibaba.dubbo.common.status.Status;
 import com.alibaba.dubbo.common.status.StatusChecker;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * MemoryStatus
  * 

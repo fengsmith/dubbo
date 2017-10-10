@@ -77,6 +77,7 @@ public class ServiceBean<T> extends ServiceConfig<T> implements InitializingBean
 		if (applicationContext != null) {
 		    SPRING_CONTEXT = applicationContext;
 		    try {
+                // addApplicationListener 这个方法 是 AbstractApplicationContext 的一个方法,其实 ApplicationContext 类没有这个方法
 	            Method method = applicationContext.getClass().getMethod("addApplicationListener", new Class<?>[]{ApplicationListener.class}); // 兼容Spring2.0.1
 	            method.invoke(applicationContext, new Object[] {this});
 	            supportedApplicationListener = true;
@@ -196,7 +197,7 @@ public class ServiceBean<T> extends ServiceConfig<T> implements InitializingBean
             if (registryConfigMap != null && registryConfigMap.size() > 0) {
                 List<RegistryConfig> registryConfigs = new ArrayList<RegistryConfig>();
                 for (RegistryConfig config : registryConfigMap.values()) {
-                    if (config.isDefault() == null || config.isDefault().booleanValue()) {
+                    if (config.isDefault() == null || config.isDefault().booleanValue()) { // 如果没有设置是否默认,那么就认为它就是默认注册,或者是设置了是否是默认,如果是默认的话
                         registryConfigs.add(config);
                     }
                 }
@@ -224,7 +225,7 @@ public class ServiceBean<T> extends ServiceConfig<T> implements InitializingBean
                 }
             }
         }
-        if ((getProtocols() == null || getProtocols().size() == 0)
+        if ((getProtocols() == null || getProtocols().size() == 0) // 为什么需要先判断 monitor protocol 是否为空?因为 monitor protocol 这些每个 ServiceBean 都共享相同的配置,但每个 dubbo 服务接口类都对应着一个 ServiceBean
                 && (getProvider() == null || getProvider().getProtocols() == null || getProvider().getProtocols().size() == 0)) {
             Map<String, ProtocolConfig> protocolConfigMap = applicationContext == null ? null  : BeanFactoryUtils.beansOfTypeIncludingAncestors(applicationContext, ProtocolConfig.class, false, false);
             if (protocolConfigMap != null && protocolConfigMap.size() > 0) {
@@ -242,7 +243,7 @@ public class ServiceBean<T> extends ServiceConfig<T> implements InitializingBean
         if (getPath() == null || getPath().length() == 0) {
             if (beanName != null && beanName.length() > 0 
                     && getInterface() != null && getInterface().length() > 0
-                    && beanName.startsWith(getInterface())) {
+                    && beanName.startsWith(getInterface())) { // 这两者完全 == 为什么要用 startsWith
                 setPath(beanName);
             }
         }

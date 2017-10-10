@@ -96,7 +96,7 @@ public class DubboBeanDefinitionParser implements BeanDefinitionParser {
         		generatedBeanName = beanClass.getName();
         	}
             id = generatedBeanName; 
-            int counter = 2;
+            int counter = 2; // todo shfq 在同一个应用中会配置多个 dubbo 文件? 应该不是,应该是因为有些元素没有设置 id 属性,如果有多个同一类型的元素不设置 id 属性的话,就会造成重复,所以需要加一个后缀 counter
             while(parserContext.getRegistry().containsBeanDefinition(id)) {
                 id = generatedBeanName + (counter ++);
             }
